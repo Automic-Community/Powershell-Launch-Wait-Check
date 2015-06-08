@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="http://50df39cf1ff06ee2b590-6135bed6c599dc7ad437e065c1d165d2.r46.cf1.rackcdn.com/stylesheets/stylesheet.css">
+    
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    
+    <!-- Star Rating JS -->
+    <script src="http://50df39cf1ff06ee2b590-6135bed6c599dc7ad437e065c1d165d2.r46.cf1.rackcdn.com/javascripts/star-rating.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="http://50df39cf1ff06ee2b590-6135bed6c599dc7ad437e065c1d165d2.r46.cf1.rackcdn.com/stylesheets/star-rating.min.css">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://b51a8ff2cfb1f3fc06d7-6135bed6c599dc7ad437e065c1d165d2.ssl.cf1.rackcdn.com/stylesheets/custom_front.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" media="all" href="https://b51a8ff2cfb1f3fc06d7-6135bed6c599dc7ad437e065c1d165d2.ssl.cf1.rackcdn.com/stylesheets/automic.css">
+
+    <title>Powershell Launch Wait Check</title>
+    
+  </head>
+
+
+<body id="ghpages">
+<div id="wrapper">
+<div id="header">
+<header>
+
+<div role="navigation" class="navbar navbar-default navbar-fixed-top" id="nav-strip">
+	<div class="bottom-nav ">
+	  <div class="row">
+	    <div class="container">
+              <dl class="dropdown nav navbar-nav navbar-right">
+                <div class="dp"></div>
+              </dl> 
+	      <div class="col-sm-3">
+		<a class="navbar-brand" href="http://www.automic.com/">
+		  
+		  <img class="image-logo" src="https://a5616ff0bb354f2460a0-9c1a2e36fc783cc4c58ab6184c27cf6b.ssl.cf1.rackcdn.com/white_logo.png" alt="">
+		  
+		</a>
+	      </div>
+	      <div class="col-sm-9">
+		<div class="navbar-header">
+		  <button data-target=".topheader" data-toggle="collapse" class="navbar-toggle" type="button">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		</div>
+		<div style=" position: relative; top: 20px;" class="navbar-collapse topheader collapse">
+                  <!--/ 	<span class="glyphicon glyphicon-user start"></span>-->
+                    <ul class="nav navbar-nav front">
+					  <li class="m-home"><a href="https://marketplace.automic.com" target="_blank">Marketplace</a></li>
+                      <li><a href="http://docs.automic.com" target="_blank">Documentation</a></li>
+                      <li><a href="https://community.automic.com" target="_blank">Community</a></li>
+                    </ul>
+		</div><!--/.nav-collapse -->
+              </div><!--/.span-12 -->
+	    </div><!--/.row -->
+	  </div>
+      </div>
+</div>
+   
+</header>
+</div>
+
+ <!-- MAIN CONTENT -->
+    <div id="content">
+      <div class="container">
+
+          
+	<div class="row">
+	  <div>
+	    <h1>Powershell Launch Wait Check</h1>
+	  </div>
+	</div>
+	<div class="row">
+	  <div>
+	    <h2>Powershell-based script utility for $Universe status check.</h2>
+	  </div>    
+	</div>
+      </div>
+    
+      <div class="container main_body">
+	<div class="row">
+	  
+	  <div class="col-md-8">
+	      <div class="row tabs">
+	      <ul class="nav nav-tabs">
+		<li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+		<li><a href="#contents" data-toggle="tab">Contents</a></li>
+		<li><a href="#compatibility" data-toggle="tab">Compatibility</a></li>
+		<li><a href="#credits" data-toggle="tab">Credits</a></li>
+	      </ul>
+	      
+	    <!-- Tab contents -->  
+	    <div class="tab-content"> 
+	      <div id="overview" class="tab-pane active">
+		<div class="row">
+		  <div class="col-md-12 description">
+		    <h3>Description</h3>
+		    <p><p><span class="bbc_underline"><span>ORSYP $Universe Launch Wait Check</span></span><br /><br />The ORSYP $Universe status check script is a Powershell-based utility that uses the built-in UXSHW tool in the ORSYP toolkit to check for Launch Wait jobs and compare their timing to the current time. Using Jenkins to run it every six hours, if any job is one hour or more beyond the Launch Window, it will email an alert to the appropriate people.<br /><br />This can be adapted to use any scheduling tool, including Windows Scheduler, but will require a little more work on your end, as Jenkins has e-mail capabilities built-in and Windows Scheduler requires extra scripts to be able to do that.</p>
+<p><strong class="title">Target environments:</strong> Windows Server 2008, Windows Server 2012</p>
+<p><strong class="title">Prerequisites:</strong> Windows Powershell 2.0</p>
+<p><strong class="title">Implementation:</strong> Tweak the scripts to point to the correct locations; in orsyp_launch_wait_check.bat, change the CALL to the uxsetenv.bat to point to the correct folder. Then, change to the correct env name in getList.ps1 - at the top, change SIM to EXP or another appropriate environment name.<br /> <br /> Then configure a scheduler of some kind (I highly recommend against setting it up in ORSYP $Universe Scheduler as if something is wacky with the scheduler, the check may not kick off) to launch the script on the scheduler server. From Jenkins, I configured Execute Windows Batch Command to use the following script:<br /> <br /> powershell invoke-command -ComputerName &lt;SERVERNAME&gt; -ScriptBlock {c:\scripts\orsyp_launch_wait_check.bat}<br /> <br /> Make sure you have Powershell remoting enabled on the ORSYP $Universe Scheduler server.</p>
+<p><br />1. What's Included<br />Included is a bat file (orsyp_launch_wait_check.bat) and a Powershell script (getList.ps1).<br /><br />The bat file loads the environment variables and then kicks off the Powershell script.<br /><br />The Powershell script launches UXSHW and fails if there are any jobs whatsoever in Launch Wait an hour or more past their launch window.<br /><br />2.Usage<br />Tweak the scripts to point to the correct locations; in orsyp_launch_wait_check.bat, change the CALL to the uxsetenv.bat to point to the correct folder. Then, change to the correct env name in getList.ps1 - at the top, change SIM to EXP or another appropriate environment name.<br /><br />Then configure a scheduler of some kind (I highly recommend against setting it up in ORSYP $Universe Scheduler as if something is wacky with the scheduler, the check may not kick off) to launch the script on the scheduler server. From Jenkins, I configured Execute Windows Batch Command to use the following script:<br /><br />powershell invoke-command -ComputerName &lt;SERVERNAME&gt; -ScriptBlock {c:\scripts\orsyp_launch_wait_check.bat}<br /><br />Make sure you have Powershell remoting enabled on the ORSYP $Universe Scheduler server.<br /><br />The job will fail with an errorlevel of 1 if there are jobs stuck past their launch wait window.<br /><br />3. Licensing<br />This is completely free &amp; open source, meaning you're absolutely free to use it, dismantle it, adapt it and change it as you see fit. It uses ORSYP's built-in tools, so licensing for ORSYP is necessitated, but for this script you don't need anything special.</p></p>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-md-12 media">
+		  <h3>Media</h3>
+		  <p>[MEDIA]</p>
+		  </div>
+		</div>
+	      </div>
+	      
+	      <div id="contents" class="tab-pane">
+		<div class="row">
+		  <h3>Contents of Package</h3>
+		  <ul>
+		    <li>PowerShell_Status_Check.zip</li><li>81-image1.png</li>
+		  </ul>
+		  <div class="downloads_buttons" style="margin-top:50px;font-size:1.2em;">
+		    <a class="download_zip dl" href="https://github.com/automic-community/Powershell-Launch-Wait-Check/zipball/master">Download .zip</a>
+			<br><br>
+		    <a class="download_tar dl" href="https://github.com/automic-community/Powershell-Launch-Wait-Check/tarball/master">Download .tar</a>  
+		  </div>
+		</div>
+	      </div>
+	      
+	      <div id="compatibility" class="tab-pane">
+		<div class="row">
+		<h3>Compatibility</h3>
+		  <div class="row">
+		    <div class="col-md-6">
+		      <h4 class="comp-product">Platform</h4>
+		      <div class="list">
+			<a href="http://marketplace.automic.com/marketplace/browse#category/Dollar Universe - UniJob">Dollar Universe - UniJob<span class="comma">,</span></a>
+		      </div>
+		    </div>
+		    <div class="col-md-6">
+		      <h4 class="comp-versions">Versions</h4>
+		      <div class="list">
+			 <a href="http://marketplace.automic.com/marketplace/browse#version/6.x">6.x<span class="comma">,</span></a>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <div class="col-md-6">
+		      <h4 class="comp-platforms">Operating Systems</h4>
+		      <div class="list">
+			 <a href="http://marketplace.automic.com/marketplace/browse#platform/Windows">Windows<span class="comma">,</span></a>
+		      </div>
+		    </div>
+		    <div class="col-md-6">
+		      <h4 class="comp-apps">Applications</h4>
+		      <div class="list">
+			
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	      </div>
+	      
+	      <div id="credits" class="tab-pane">
+		<div class="row">
+		<h3>Created by....</h3>
+		<div>
+		  Created By:  , 
+		</div>
+		</div>
+	      </div>
+	      
+	    </div>
+	    <!-- End of Tabbed Content -->
+	    </div>
+	      
+	    
+	<!-- Pulled out Comment code -->   
+	  
+	  </div>
+	  
+	  <div class="col-md-3 col-md-offset-1" style="top: -33px;">
+	    
+	      <div class="row d-links">
+		<div class="down-t">Downloads</div>
+		<a class="zip_download_link dl" href="https://github.com/Automic-Community/Powershell-Launch-Wait-Check/zipball/master">Download this project as a .zip file</a>
+		<a class="tar_download_link dl" href="https://github.com/Automic-Community/Powershell-Launch-Wait-Check/tarball/master">Download this project as a tar.gz file</a>
+	      </div>
+
+	      <div class="row rating">
+
+		<a class="forkme" href="https://github.com/Automic-Community/Powershell-Launch-Wait-Check">View on GitHub</a>
+		 
+	  	 
+		<div class="social-buttons">
+		  <a target="_blank" class="share-btn twitter" href="http://twitter.com/share?url=http://automic-community.github.io/Powershell-Launch-Wait-Check&text=Check%20out%20this%20awesome%20Template%20on%20the%20%23AutomicCommunity%20eXchange&via=automic">
+		    <i class="fa fa-twitter"></i>
+		  </a>
+		  <a target="_blank" class="share-btn linkedin" href="http://www.linkedin.com/shareArticle?url=url=http://automic-community.github.io/Powershell-Launch-Wait-Check&title=Powershell Launch Wait Check&summary=Powershell-based script utility for $Universe status check.&source=url=http://github.com/automic-community/Powershell-Launch-Wait-Check">
+		    <i class="fa fa-linkedin"></i>
+		  </a>
+		  <a target="_blank" class="share-btn facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://automic-community.github.io/Powershell-Launch-Wait-Check">
+		    <i class="fa fa-facebook-square"></i>
+		  </a>
+		  <a target="_blank" class="share-btn google-plus" href="https://plus.google.com/share?url=http://automic-community.github.io/Powershell-Launch-Wait-Check">
+		    <i class="fa fa-google-plus-square"></i>
+		  </a>
+		  <a target="_blank" class="share-btn email" href="mailto:?subject=Check%20out%20this%20awesome%20Template%20on%20the%20%23AutomicCommunity%20eXchange&body=Powershell-based script utility for $Universe status check." >
+		    <i class="fa fa-envelope"></i>
+		  </a>
+		</div>
+
+	      </div>
+	   
+	    
+	    <div class="row tags">
+	      <div class="comp-type">
+		Template
+	      </div>
+	      <div class="comp-product">
+		<a href="http://marketplace.automic.com/marketplace/browse#category/Dollar Universe - UniJob">Dollar Universe - UniJob<span class="comma">,</span></a>
+	      </div>
+	      <div class="comp-versions">
+	       <a href="http://marketplace.automic.com/marketplace/browse#version/6.x">6.x<span class="comma">,</span></a>
+	      </div>
+	      <div class="comp-platforms">
+		 <a href="http://marketplace.automic.com/marketplace/browse#platform/Windows">Windows<span class="comma">,</span></a>
+	      </div>
+	      <div class="comp-apps">
+		
+	      </div>
+	    </div>
+	      
+	    <div class="row help">
+		<a class="supported" href="#">Community Supported</a>
+		<div class="ask">
+		  <a href="https://community.automic.com" target="_blank" class="btn">Ask the Community</a>
+		</div>
+		<p>
+		  Converse with your fellow Users in the <a href="http://community.automic.com">Community</a>.
+		</p>
+	    </div>
+	    
+	  </div>
+	
+	</div>
+	
+	<div class="row">
+	  <div class="col-md-3 col-md-offset-9">
+	    <div class="copyright">
+	      <h4>Copyright and License</h4>
+	      <p>
+		Solutions, Templates and other content created by the Automic Community and available on the Automic Marketplace is subject to the standard Community <a href="http://automic.com/community-terms-of-service">Terms of Service</a>. 
+		Automic does not support, maintain or warrant any Solution, Templates and/or other content created by the Automic Community on the Automic Marketplace.
+	      </p>
+	    </div>
+	  </div>
+	</div>
+	
+      </div>
+    </div>
+  
+  <div id="footer">
+  <footer>
+    <div class="container">
+      <!-- FOOTER  -->
+      <div class="row"> 
+	  <div class="copyright">
+	    Package maintained by the <a href="https://github.com/Automic-Community">Automic-Community</a> GitHub Org
+	  </div>
+	  <div>
+	    Published by the <a href="https://community.automic.com">Automic Think Tank</a>
+	  </div>
+      </div>
+    </div>
+  </footer>
+</div>
+  
+    </div>
+  </body>
+</html>
